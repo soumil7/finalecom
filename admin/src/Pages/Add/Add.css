@@ -1,0 +1,135 @@
+/* Add.css */
+
+/* Base Styles */
+.add {
+    width: 90%; /* Default width for small screens */
+    max-width: 500px; /* Limit maximum width */
+    margin: 0 auto; /* Center align */
+    color: #6d6d6d; /* Text color */
+    font-size: 16px; /* Default font size */
+    padding: 20px; /* Padding for the container */
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Form styles */
+.add form {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Space between form elements */
+}
+
+/* Flex column for input fields */
+.flex-col {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Stack vertically */
+    gap: 10px; /* Space between items */
+}
+
+/* Input and textarea styles */
+.add-product-name input,
+.add-product-description textarea,
+.add-category-price select,
+.add-category-price input {
+    padding: 10px; /* Inner padding */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 5px; /* Rounded corners */
+    transition: border-color 0.3s; /* Transition for border color */
+}
+
+/* Styles for product name and description fields */
+.add-product-name,
+.add-product-description {
+    width: 100%; /* Full width on smaller screens */
+}
+
+/* Category and price section styles */
+.add-category-price {
+    display: flex; /* Flexbox for category and price layout */
+    gap: 20px; /* Space between category and price inputs */
+}
+
+/* Button styles */
+.add-btn {
+    max-width: 150px; /* Limit button width */
+    padding: 10px; /* Inner padding */
+    background-color: black; /* Button background */
+    color: white; /* Button text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Button hover effect */
+.add-btn:hover {
+    background-color: #333; /* Darker shade on hover */
+}
+
+/* Input focus styles */
+.add-product-name input:focus,
+.add-product-description textarea:focus,
+.add-category-price select:focus,
+.add-category-price input:focus {
+    border-color: #ffdd57; /* Change border color on focus */
+    outline: none; /* Remove outline */
+}
+
+/* Responsive Styles */
+
+/* Mobile 320px */
+@media (max-width: 320px) {
+    .add {
+        width: 95%; /* Adjust width for very small screens */
+    }
+}
+
+/* Mobile 375px */
+@media (max-width: 375px) {
+    .add {
+        width: 90%; /* Adjust width for mobile screens */
+    }
+
+    .add-category-price {
+        flex-direction: column; /* Stack category and price vertically */
+        gap: 10px; /* Reduce gap */
+    }
+
+    .add-category-price select,
+    .add-category-price input {
+        max-width: 100%; /* Full width for select/input */
+    }
+}
+
+/* Mobile 425px */
+@media (max-width: 425px) {
+    .add-category-price {
+        flex-direction: column; /* Stack vertically */
+    }
+}
+
+/* Tablet 768px */
+@media (min-width: 768px) {
+    .add {
+        width: 80%; /* Wider on tablet */
+    }
+
+    .add-category-price {
+        flex-direction: row; /* Align category and price side by side */
+    }
+}
+
+/* Laptop 1440px */
+@media (min-width: 1440px) {
+    .add {
+        width: 60%; /* Further increase width on larger screens */
+    }
+}
+
+/* 4K 2560px */
+@media (min-width: 2560px) {
+    .add {
+        width: 50%; /* Center with more space on very large screens */
+    }
+}

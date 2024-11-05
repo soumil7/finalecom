@@ -1,0 +1,141 @@
+/* Kitchen Products Container */
+.kitchen-container {
+  padding: 20px;
+}
+
+/* Product Grid Layout */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Default: 4 columns */
+  gap: 20px; /* Space between the grid items */
+}
+
+/* Product Card */
+.product-card {
+  background-color: #fff; /* Background color of product card */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  padding: 15px; /* Padding inside the card */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+  cursor: pointer; /* Pointer cursor for clickable cards */
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+}
+
+/* Product Image */
+.product-image {
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Match card corners */
+}
+
+/* Product Name */
+.product-name {
+  font-size: 1.25rem; /* Font size for product name */
+  margin: 10px 0; /* Margin above and below */
+}
+
+/* Product Description */
+.product-description {
+  font-size: 0.875rem; /* Font size for description */
+  color: #666; /* Grey color for description */
+}
+
+/* Product Price */
+.product-price {
+  font-size: 1rem; /* Font size for price */
+  font-weight: bold; /* Bold price */
+  color: #333; /* Dark color for price */
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex; /* Flexbox for aligning buttons */
+  justify-content: space-between; /* Space between buttons */
+  margin-top: 10px; /* Space above buttons */
+}
+
+/* Add to Cart Button */
+.add-to-cart {
+  background-color: #28a745; /* Green background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.add-to-cart:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* Bookmark Button */
+.bookmark-button {
+  background: none; /* Transparent background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor */
+}
+
+/* Icon Styles */
+.bookmark-icon {
+  color: #007bff; /* Default blue color */
+  font-size: 1.5rem; /* Font size */
+}
+
+.bookmarked-icon {
+  color: #ffb400; /* Gold color when bookmarked */
+  font-size: 1.5rem; /* Font size */
+}
+
+/* Recently Viewed Container */
+.recently-viewed-container {
+  margin-top: 40px; /* Space above the section */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding: 10px 0; /* Add some padding for aesthetics */
+}
+
+/* Recently Viewed Grid */
+.recently-viewed-grid {
+  display: flex; /* Use flexbox for horizontal layout */
+  gap: 20px; /* Space between items */
+}
+
+/* Recently Viewed Card */
+.recently-viewed-card {
+  background-color: #fff; /* Background color */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  padding: 10px; /* Padding inside the card */
+  min-width: 150px; /* Minimum width for cards to maintain layout */
+  flex-shrink: 0; /* Prevent cards from shrinking */
+}
+
+/* Recently Viewed Image */
+.recently-viewed-image {
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Match card corners */
+}
+
+/* Recently Viewed Name */
+.recently-viewed-name {
+  font-size: 1rem; /* Font size */
+  margin: 5px 0; /* Margin above and below */
+}
+
+/* Recently Viewed Price */
+.recently-viewed-price {
+  font-size: 0.875rem; /* Font size */
+  color: #666; /* Grey color */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .recently-viewed-card {
+    min-width: 120px; /* Adjust minimum width for smaller screens */
+  }
+}
+

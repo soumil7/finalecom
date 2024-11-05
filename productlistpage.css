@@ -1,0 +1,246 @@
+@keyframes slidein {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.animate-slidein > * {
+    animation: slidein 2s forwards;
+}
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.animate-fadein {
+    animation: fadein 2s ease-out;
+}
+
+/*header starting*/
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.image{
+    height: 40px;
+    padding: 10px;
+    border-bottom-right-radius: 16px;
+    border-top-right-radius: 16px;
+    display: inline-block;
+    background-color: white;
+}
+
+/* catogories starts */
+.scrollable-header {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.scrollable-header::-webkit-scrollbar {
+    height: 8px; /* Adjust the scrollbar height */
+}
+.scrollable-header::-webkit-scrollbar-thumb {
+    display: none;
+}
+.catagorie ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+.catagorie li {
+    position: relative;
+}
+.catagorie a{
+    white-space: nowrap;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.catagorie li:hover a {
+    color: #e64c4c;
+}
+.catagorie-link::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e64c4c;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out 0s;
+}
+.catagorie-link:hover:before{
+    visibility: visible;
+    width: 100%;
+}
+/* catogories ends */
+
+
+/* nav bar*/
+.nav{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.nav ul{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+.nav li {
+    position: relative;
+}
+.nav a{
+    white-space: nowrap;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.nav li:hover a {
+    color: #e64c4c;
+}
+
+/*  mobile sidebar starting*/
+
+.sideBar {
+    position: fixed;
+    width: 300px;
+    height: 100vh;
+    background-color: #3036a3df;
+    right: -300px;
+    top: 0;
+    z-index: 100;
+    transition: 0.3s;
+    display: block;
+}
+.sideBar #close {
+    float: right;
+    margin-top: 5px;
+    margin-right: 20px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+.sideBar ul{
+    list-style: none;
+    margin-top: 10vh;
+}
+.sideBar li {
+    font-family: "Raleway", sans-serif;
+    padding: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.sideBar li a {
+    color: white;
+    text-decoration: none;
+    transform: 0.2s !important;
+}
+.sideBar li:hover a {
+    color: whitesmoke !important;
+}
+.sideBar li:hover {
+    background-color: #167a8b;
+}
+#openButton {
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 15px;
+}         
+/*  mobile sidebar ending*/
+
+/*  chatbot sidebar starting*/
+
+.sideBar2 {
+    position: fixed;
+    width: auto;
+    padding: 20px;
+    height: 100vh;
+    background-color: #3036a3e3;
+    right: -400px;
+    top: 0;
+    z-index: 100;
+    transition: 0.3s;
+    display: block;
+}
+.sideBar2 #close2 {
+    float: right;
+    margin-top: 5px;
+    margin-right: 20px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+#openButton2 {
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 15px;
+} 
+/*  chatbot sidebar ending*/
+
+/*header ending*/
+
+
+/* Main starting*/
+
+/*  filter sidebar starting*/
+
+.sideBar3 {
+    position: fixed;
+    width: 100%; 
+    max-width: 400px; 
+    padding: 20px;
+    height: 100%;
+    max-height: max-content;
+    background-color: #3036a3;
+    right: -400px;
+    top: 0;
+    z-index: 100;
+    transition: 0.5s ease;
+    display: block;
+    overflow-y: auto; 
+}
+.sideBar3 #close3 {
+    float: right;
+    margin-top: 5px;
+    margin-right: 20px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+#openButton3 {
+    font-size: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 15px;
+}
+/*  filter sidebar ending*/
+
+/* Main ending*/

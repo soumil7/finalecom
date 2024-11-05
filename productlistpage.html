@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product list page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./productlistpage.css" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body>
+    
+    <header class="sticky-header bg-[#3035a3]">
+        <div class="container mx-auto p-2 flex justify-between items-center">
+    
+            <!-- Logo -->
+            <div class="relative">
+                <img src="../Assets/logo.png" alt="Logo" class="rounded-2xl w-14 h-14">
+            </div>
+
+            <!-- Search Box -->
+            <div class="md:flex justify-end items-center space-x-4 flex-1 mx-6">
+                <div class="flex justify-center items-center w-full">
+                    <input type="search" placeholder="Search for products" class="w-3/4 rounded-l-2xl px-4 py-2 focus:outline-none">
+                    <img src="../Assets/icons8-search-100.png" alt="search" class="image">
+                </div>
+            </div>
+    
+            <!-- Navigation Links -->
+            <nav class="nav lg:flex hidden items-center">
+                <ul class="text-xl flex space-x-2">
+                    <li class="relative">
+                        <a href="./cart.html" class=" text-white">
+                            <span>Cart</span>
+                        </a>
+                        <span onclick="redirectToCartPage()" id="cartCount" class="bg-black text-white rounded-full w-5 h-5 flex items-center justify-center absolute -top-0 -right-0">0</span>
+                    </li>
+                    <li><a href="#about" class="">Orders</a></li>
+                    <li><a href="./profile_login/login.html" class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 ">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </a></li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Sidebar -->
+            <div class="lg:hidden flex justify-center items-center">
+                <ion-icon id="openButton" name="menu-outline" class="flex items-center">
+                    <button class="text-white text-center focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </ion-icon>
+                <div class="sideBar" id="sideBar">
+                    <a id="close">&times;</a>
+                    <ul class="text-xl">
+                        <li><a href="#" class="nav-link">Profile</a></li>
+                        <li><a href="#" class="nav-link">Orders</a></li>
+                        <li><a href="#" class="nav-link">Cart</a></li>
+                    </ul>
+                </div>
+            </div>   
+
+        </div>
+
+        <!-- Grid of product names -->
+        <div class="scrollable-header catagorie border-b-2 border-t-2 border-black bg-white z-[-50]">
+            <ul class="flex justify-evenly items-center cursor-default px-4 space-x-4 md:space-x-8">
+                <li><a onclick="showSection('section1')" class="block  catagorie-link text-xl font-serif">Kitchen appliances</a></li>
+                <li><a onclick="showSection('section2')" class="block catagorie-link text-xl font-serif">Pooja products</a></li>
+                <li><a onclick="showSection('section3')" class="block catagorie-link text-xl font-serif">Home Decorations</a></li>
+                <li><a onclick="showSection('section4')" class="block catagorie-link text-xl font-serif">Fashion Wears</a></li>
+            </ul>
+        </div>
+
+ 
+        <!-- Chatbot container -->
+        <div class="bg-gray-200 flex items-center justify-center">
+
+            <!-- Trigger Button -->
+            <ion-icon id="openButton2" name="menu-outline" class="flex items-center fixed bottom-4 right-4 cursor-pointer">
+                <button class="text-white text-center focus:outline-none">
+                    <img src="/Assets/chatbot.png" alt="Chatbot Icon" id="chatbot-trigger" class="size-16 bg-white border-4 border-[#3035a3] p-2 m-4 rounded-3xl
+                    transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                </button>             
+            </ion-icon>
+            <div class="sideBar2 flex flex-col justify-between " id="sideBar2">
+                <a id="close2">&times;</a>
+                <div id="chatbot-container" class="chatbot-container w-full max-w-lg bg-white rounded-lg">
+                    <div class="chatbox p-4 space-y-4">
+                        <!-- Messages will be added here -->
+                    </div>
+                    <div class="p-4 border-t">
+                        <form id="chat-form" class="flex">
+                            <input type="text" id="user-input" class="flex-grow p-2 border border-gray-300 rounded-l-lg" placeholder="Type a message..." required>
+                            <button type="submit" class="p-2 bg-blue-500 text-white rounded-r-lg">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main class="flex border-b-2 border-black">
+
+        <!-- Mobile Sidebar -->
+        <div class=" flex bg-[#3035a3] text-white justify-center items-start">
+            <ion-icon id="openButton3" name="menu-outline" class="flex items-center">
+                <button class="text-white text-center focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </ion-icon>
+            <div class="sideBar3" id="sideBar3">
+                <a id="close3">&times;</a>
+                <aside class="flex-col text-white p-5">
+                    <!-- <h2>Filters</h2> -->
+                    <button id="applyFiltersButton" onclick="applyFilters()">Apply Filters</button>
+                    <div class="filter">
+                        <h3>Delivery Day</h3>
+                        <label><input type="checkbox" name="delivery-day" value="tomorrow"> Get It by Tomorrow</label><br>
+                        <label><input type="checkbox" name="delivery-day" value="2-days"> Get It in 2 Days</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Category</h3>
+                        <label><input type="checkbox" name="category" value="small-kitchen-appliances"> Small Kitchen
+                            Appliances</label><br>
+                        <label><input type="checkbox" name="category" value="large-kitchen-appliances"> Large Kitchen
+                            Appliances</label><br>
+                        <label><input type="checkbox" name="category" value="cookware"> Cookware</label><br>
+                        <label><input type="checkbox" name="category" value="utensils"> Utensils</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Customer Review</h3>
+                        <label><input type="checkbox" name="rating" value="4-stars-and-up">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="empty-star">★</span>
+                            </div>
+                        </label><br>
+                        <label><input type="checkbox" name="rating" value="3-stars-and-up">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="empty-star">★</span>
+                                <span class="empty-star">★</span>
+                            </div>
+                        </label><br>
+                        <label><input type="checkbox" name="rating" value="2-stars-and-up">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="empty-star">★</span>
+                                <span class="empty-star">★</span>
+                                <span class="empty-star">★</span>
+                            </div>
+                        </label><br>
+        
+                    </div>
+                    <div class="filter">
+                        <h3>Brands</h3>
+                        <label><input type="checkbox" name="brand" value="cookwell"> COOKWELL</label><br>
+                        <label><input type="checkbox" name="brand" value="philips"> PHILIPS</label><br>
+                        <label><input type="checkbox" name="brand" value="crompton"> Crompton</label><br>
+                        <label><input type="checkbox" name="brand" value="lifelong"> Lifelong</label><br>
+                        <label><input type="checkbox" name="brand" value="prestige"> Prestige</label><br>
+                        <label><input type="checkbox" name="brand" value="bajaj"> Bajaj</label><br>
+                        <label><input type="checkbox" name="brand" value="wonderchef"> Wonderchef</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Price</h3>
+                        <div class="range-values">
+                            <span>₹100 -</span><span> ₹1000</span>
+                        </div>
+                        <div class="price-slider">
+                            <input type="range" min="0" max="1000" value="500" class="slider" id="priceRange">
+                        </div>
+                    </div>
+                    <div class="filter">
+                        <h3>Deals & Discounts</h3>
+                        <label><input type="checkbox" name="deals" value="all-discounts"> All Discounts</label><br>
+                        <label><input type="checkbox" name="deals" value="todays-deals"> Today's Deals</label>
+                    </div>
+        
+                    <div class="filter">
+                        <h3>Special Features</h3>
+                        <label><input type="checkbox" name="features" value="adjustable-speed-control"> Adjustable Speed
+                            Control</label><br>
+                        <label><input type="checkbox" name="features" value="anti-skid"> Anti-Skid</label><br>
+                        <label><input type="checkbox" name="features" value="auto-shut-off"> Auto Shut Off</label><br>
+                        <label><input type="checkbox" name="features" value="dishwasher-safe-jars"> Dishwasher Safe</label><br>
+                        <label><input type="checkbox" name="features" value="heavy-duty"> Heavy Duty</label><br>
+                        <label><input type="checkbox" name="features" value="led-power-indicator"> LED Power
+                            Indicator</label><br>
+                        <label><input type="checkbox" name="features" value="lightweight"> Lightweight</label><br>
+                        <label><input type="checkbox" name="features" value="low-noise"> Low Noise</label><br>
+                        <label><input type="checkbox" name="features" value="overheat-protection"> Overheat
+                            Protection</label><br>
+                        <label><input type="checkbox" name="features" value="overload-protection"> Overload
+                            Protection</label><br>
+                        <label><input type="checkbox" name="features" value="portable"> Portable</label><br>
+                        <label><input type="checkbox" name="features" value="programmable"> Programmable</label><br>
+                        <label><input type="checkbox" name="features" value="rust-resistant"> Rust Resistant</label><br>
+                        <label><input type="checkbox" name="features" value="safety-lock"> Safety Lock</label><br>
+                        <label><input type="checkbox" name="features" value="shock-resistant"> Shock Resistant</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Pay On Delivery</h3>
+                        <label><input type="checkbox" name="pay-on-delivery" value="eligible"> Eligible for Pay On
+                            Delivery</label>
+                    </div>
+                    <div class="filter">
+                        <h3>New Arrivals</h3>
+                        <label><input type="checkbox" name="new-arrivals" value="last-30-days"> Last 30 days</label><br>
+                        <label><input type="checkbox" name="new-arrivals" value="last-90-days"> Last 90 days</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Discount</h3>
+                        <label><input type="checkbox" name="discount" value="10-percent-off-or-more"> 10% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="25-percent-off-or-more"> 25% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="35-percent-off-or-more"> 35% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="50-percent-off-or-more"> 50% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="60-percent-off-or-more"> 60% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="70-percent-off-or-more"> 70% Off or more</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Seller</h3>
+                        <label><input type="checkbox" name="seller" value="mytri-marketing"> Mytri Marketing</label><br>
+                        <label><input type="checkbox" name="seller" value="tirupati-marketing"> Tirupati Marketing (Factory
+                            Outlet) Since 1984</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Availability</h3>
+                        <label><input type="checkbox" name="availability" value="include-out-of-stock"> Include Out of
+                            Stock</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Special Features</h3>
+                        <label><input type="checkbox" name="features" value="adjustable-speed-control"> Adjustable Speed
+                            Control</label><br>
+                        <label><input type="checkbox" name="features" value="anti-skid"> Anti-Skid</label><br>
+                        <label><input type="checkbox" name="features" value="auto-shut-off"> Auto Shut Off</label><br>
+                        <label><input type="checkbox" name="features" value="dishwasher-safe-jars"> Dishwasher Safe</label><br>
+                        <label><input type="checkbox" name="features" value="heavy-duty"> Heavy Duty</label><br>
+                        <label><input type="checkbox" name="features" value="led-power-indicator"> LED Power
+                            Indicator</label><br>
+                        <label><input type="checkbox" name="features" value="lightweight"> Lightweight</label><br>
+                        <label><input type="checkbox" name="features" value="low-noise"> Low Noise</label><br>
+                        <label><input type="checkbox" name="features" value="overheat-protection"> Overheat
+                            Protection</label><br>
+                        <label><input type="checkbox" name="features" value="overload-protection"> Overload
+                            Protection</label><br>
+                        <label><input type="checkbox" name="features" value="portable"> Portable</label><br>
+                        <label><input type="checkbox" name="features" value="programmable"> Programmable</label><br>
+                        <label><input type="checkbox" name="features" value="rust-resistant"> Rust Resistant</label><br>
+                        <label><input type="checkbox" name="features" value="safety-lock"> Safety Lock</label><br>
+                        <label><input type="checkbox" name="features" value="shock-resistant"> Shock Resistant</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Pay On Delivery</h3>
+                        <label><input type="checkbox" name="pay-on-delivery" value="eligible">Eligible for Pay On
+                            Delivery</label>
+                    </div>
+                    <div class="filter">
+                        <h3>New Arrivals</h3>
+                        <label><input type="checkbox" name="new-arrivals" value="last-30-days"> Last 30 days</label><br>
+                        <label><input type="checkbox" name="new-arrivals" value="last-90-days"> Last 90 days</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Discount</h3>
+                        <label><input type="checkbox" name="discount" value="10-percent-off-or-more"> 10% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="25-percent-off-or-more"> 25% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="35-percent-off-or-more"> 35% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="50-percent-off-or-more"> 50% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="60-percent-off-or-more"> 60% Off or
+                            more</label><br>
+                        <label><input type="checkbox" name="discount" value="70-percent-off-or-more"> 70% Off or more</label>
+                    </div>
+                    <div class="filter">
+                        <h3>Seller</h3>
+                        <label><input type="checkbox" name="seller" value="mytri-marketing"> Mytri Marketing</label><br>
+                        <label><input type="checkbox" name="seller" value="tirupati-marketing"> Tirupati Marketing (Factory
+                            Outlet) Since 1984</label>
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <div class="w-full">
+            <!-- Section 1:  -->
+            <section id="section1" class="section active mx-auto ">
+                <h1 class="text-3xl m-5">Kitchen products</h1>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2:  -->
+            <section id="section2" class="section mx-auto hidden">
+                <h1 class="text-3xl m-5">pooja products</h1>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3:  -->
+            <section id="section3" class="section mx-auto hidden">
+                <h1 class="text-3xl m-5">home decarations</h1>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                    <div class="relative bg-opacity-90 p-2 pb-2 bg-white border border-slate-300 m-3 transition-transform duration-200 backdrop-blur-sm hover:translate-y-[-5px]">
+                        <a href="./productdetailpage.html" class="">
+                            <div><img src="/Assets/pooja product.webp" alt="Incense Sticks"></div>
+                
+                                <div>
+                                    <h3 class="text-lg text-[#393ec9]">Incense Sticks</h3>
+                                <div class="rating-group" data-rating-group="1">
+                                    <div class="flex stars">
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                </div>
+                                <p class="text-lg">$5.00</p>
+                                <p class="text-[#555]">Free delivery for this product is available.</p>
+                            </div>
+                        </a>
+                        <a href="./cart.html">
+                            <div class="flex justify-center items-center"><button onclick="addToCart('Blender', 'blender.webp', 50, 'High-speed blender for smoothies and soups.')"
+                                class="bg-[#393ec9] text-white p-3 mt-2 w-full rounded-3xl cursor-pointer transition-colors duration-300 hover:bg-[#3035a3]">Add to Cart</button>
+                           </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4:  -->
+            <section id="section4" class="section mx-auto hidden">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-blue-500 mb-4">Get in Touch</h2>
+                    <p class="text-xl text-gray-700">Feel free to reach out to us for any inquiries.</p>
+                </div>
+            </section>       
+        </div>
+    
+    </main>
+
+    <footer class="bg-[#3035a3] text-white p-4">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:justify-between">
+                <!-- Contact Information -->
+                <div class="mb-6 md:mb-0 md:w-1/3">
+                    <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+                    <p class="mb-2">Email: <a href="mailto:info@example.com" class="text-blue-400 hover:underline">info@example.com</a></p>
+                    <p class="mb-2">Phone: <a href="tel:+1234567890" class="text-blue-400 hover:underline">+1 (234) 567-890</a></p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="mb-6 md:mb-0 md:w-1/4">
+                    <h2 class="text-2xl font-bold mb-4">Quick Links</h2>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-blue-400 hover:underline">Home</a></li>
+                        <li><a href="#about" class="text-blue-400 hover:underline">About Us</a></li>
+                        <li><a href="#services" class="text-blue-400 hover:underline">Services</a></li>
+                        <li><a href="#blog" class="text-blue-400 hover:underline">Blog</a></li>
+                        <li><a href="#contact" class="text-blue-400 hover:underline">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="md:w-2/4">
+                    <h2 class="text-2xl font-bold mb-4">Send Us a Message</h2>
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Submit</button>
+                    </form>
+                    <div id="formResponse" class="mt-4"></div>
+                </div>
+            </div>
+            <!--copyright-->
+            <div class="container  mx-auto text-center">
+                <p>&copy; 2024 Lion king Homepage. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./productlistpage.js"></script>
+    <script>
+        
+    </script>
+</body>
+</html>
